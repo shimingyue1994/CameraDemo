@@ -101,9 +101,9 @@ public class CameraSimpleActivity extends AppCompatActivity {
             /*注意CameraInfo中的方向为摄像头采集方向这个值不会因为setDisplayOrientation的调用而发生改变，setDisplayOrientation方法改变的只是界面上的预览方向*/
             Camera.CameraInfo cameraInfos = new Camera.CameraInfo();
             Camera.getCameraInfo((cameraCurrentlyLocked + 1) % numberOfCameras, cameraInfos);
-            if ((cameraCurrentlyLocked + 1) % numberOfCameras == 0) {
+            if (cameraInfos.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
                 mBinding.tvShowCamerafx.setText("后置摄像头方向：" + cameraInfos.orientation);
-            } else {
+            } else if (cameraInfos.facing == Camera.CameraInfo.CAMERA_FACING_FRONT){
                 mBinding.tvShowCamerafx.setText("前置摄像头方向：" + cameraInfos.orientation);
             }
             cameraCurrentlyLocked = (cameraCurrentlyLocked + 1)
@@ -195,7 +195,11 @@ public class CameraSimpleActivity extends AppCompatActivity {
 
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             Camera.getCameraInfo(id, cameraInfo);
-            mBinding.tvShowCamerafx.setText("后置摄像头方向：" + cameraInfo.orientation);
+            if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_BACK) {
+                mBinding.tvShowCamerafx.setText("后置摄像头方向：" + cameraInfo.orientation);
+            } else if (cameraInfo.facing == Camera.CameraInfo.CAMERA_FACING_FRONT){
+                mBinding.tvShowCamerafx.setText("前置摄像头方向：" + cameraInfo.orientation);
+            }
             cameraCurrentlyLocked = id;
             qOpened = (mCamera != null);
         } catch (Exception e) {
@@ -418,7 +422,7 @@ public class CameraSimpleActivity extends AppCompatActivity {
     };
 
 
-    public static void setCameraDisplayOrientation(Activity activity,
+    public  void setCameraDisplayOrientation(Activity activity,
                                                    int cameraId, Camera camera) {
         Camera.CameraInfo info =
                 new Camera.CameraInfo();
@@ -450,6 +454,7 @@ public class CameraSimpleActivity extends AppCompatActivity {
         }
         if (camera != null) {
             camera.setDisplayOrientation(result);
+            mBinding.tvShowPreviewor.setText("预览方向："+result+" 屏幕方向："+degrees);
             Log.i("CameraSimpleActivity", "相机预览方向发生改变：setCameraDisplayOrientation"+"degrees:"+degrees+" result:"+result);
         }
     }
