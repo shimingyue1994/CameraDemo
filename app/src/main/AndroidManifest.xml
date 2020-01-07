@@ -27,7 +27,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".camera1.CameraSimpleActivity"></activity>
+        <activity
+            android:name=".activity.VTestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.HTestActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape" />
+        <activity android:name=".activity.OpencvCameraActivity" />
+        <activity android:name=".camera1.ScanningActivity" />
+        <activity android:name=".camera1.CameraSimpleActivity" />
         <activity android:name=".camera1.CameraTest01Activity" />
         <activity android:name=".camera1.DirectionActivity" />
         <activity android:name=".camera1.Test01Activity" />

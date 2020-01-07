@@ -13,6 +13,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.yue.camerademo.activity.HTestActivity;
+import com.yue.camerademo.activity.VTestActivity;
 import com.yue.camerademo.adapter.MainAdapter;
 import com.yue.camerademo.bean.MainBean;
 import com.yue.camerademo.camera1.CameraSimpleActivity;
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         list.add(new MainBean(CameraSimpleActivity.class, "相机简单预览", "相机简单预览"));
         list.add(new MainBean(CameraTest01Activity.class, "相机初级显示", "相机初级显示"));
+        list.add(new MainBean(HTestActivity.class, "H", "H"));
+        list.add(new MainBean(VTestActivity.class, "V", "V"));
         adapter.notifyDataSetChanged();
     }
     //////////////////////////////////    动态权限申请   ////////////////////////////////////////
